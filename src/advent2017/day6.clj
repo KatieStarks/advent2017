@@ -9,7 +9,7 @@
 
 (defn update-index [n]
   (swap! results inc-n n)
-              )
+  )
 
 (defn redistribute [result]
   (let [val (apply max result)
@@ -24,3 +24,12 @@
     (if (contains? prev-results memory)
       (count prev-results)
       (recur (conj prev-results memory) (redistribute memory)))))
+
+(defn -main2 []
+  (let [new-results (loop [prev-results #{}
+                           memory @results]
+                      (if (contains? prev-results memory)
+                        (last prev-results)   ;; updated for part two
+                        (recur (conj prev-results memory) (redistribute memory))))]
+    (reset! results new-results)
+    (-main1)))
