@@ -30,9 +30,6 @@
 
 (def processed-input (atom (mapv read-string (str/split-lines input))))
 
-(defn update-n [val]
-  (swap! n #(+ @n %) val))
-
 (defn inc-n [coll n shift]
   (update coll n #(+ shift %)))
 
